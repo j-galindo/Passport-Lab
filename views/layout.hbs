@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>{{title}}</title>
+  <link rel="stylesheet" href="/stylesheets/style.css" />
+</head>
+<body>
+   <div class="navbar">
+      
+      <a href="/movies">All Movies</a>
+      <a href="/movies/new">Add a New Movie</a>
+      <a href="/celebrities">View Celebrities</a>
+      <a href="/celebrities/new">Add a New Celebrity</a> 
+
+      {{#unless theUser}}
+      <a href="/secret" class="login">Profile</a> 
+      <a href="/login" class="login">LOGIN</a> 
+      <a href="/signup" class="login">SIGNUP</a> 
+      {{/unless}}
+
+      {{#if theUser}}
+      <form class ="button"action ="/logout" method="POST">
+      <button >LOGOUT</button>
+      </form>
+      {{/if}}
+     
+
+      
+      
+
+      
+    </div>
+    {{#if errorMessage}}
+      <div>{{errorMessage}}</div>
+      {{/if}}
+
+  {{{body}}}
+
+  <script src="/javascripts/script.js"></script>
+</body>
+</html>
