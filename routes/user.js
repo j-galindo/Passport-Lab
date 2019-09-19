@@ -61,6 +61,18 @@ router.get('/secret', (req, res, next) => {
 
 })
 
+router.post('/user/delete', (req, res, next) => {
+
+    user.findByIdAndRemove(req.user._id)
+        .then(() => {
+            res.redirect('/')
+        })
+        .catch((err) => {
+            next(err)
+        })
+
+})
+
 
 
 
