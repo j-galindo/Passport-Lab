@@ -16,26 +16,30 @@
       <a href="/celebrities/new">Add a New Celebrity</a> 
 
       {{#unless theUser}}
-      <a href="/secret" class="login">Profile</a> 
+     
       <a href="/login" class="login">LOGIN</a> 
       <a href="/signup" class="login">SIGNUP</a> 
       {{/unless}}
 
       {{#if theUser}}
       <form class ="button"action ="/logout" method="POST">
-      <button >LOGOUT</button>
+      <button class="button">LOGOUT</button>
       </form>
+       <a href="/secret" class="login">PROFILE</a> 
       {{/if}}
-     
-
-      
-      
 
       
     </div>
-    {{#if errorMessage}}
-      <div>{{errorMessage}}</div>
+      
+      
+      {{#if errorMessage}}
+        <div class="alert warning">
+          <span class="closebtn"></span>  
+          <strong>{{errorMessage}}</strong> 
+        </div>
       {{/if}}
+      
+     
 
   {{{body}}}
 

@@ -5,9 +5,14 @@
 <h2><a href="/movies/details/{{this.id}}"> 
 {{this.title}}
 </a></h2>
+
+
+{{#if this.mine}}
 <form action="/movies/delete/{{this._id}}" method="POST">
     <button class ="button">Remove Movie</button>
 </form>
 
 <a class="edit" href="/movies/editmovie/{{this._id}}">Edit Movie's Info</a>
+
+{{/if}}
 {{/each}}

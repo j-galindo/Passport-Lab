@@ -5,9 +5,20 @@ const Celebrity = require('../models/celebrity')
 
 /* GET home page */
 router.get('/movies', (req, res, next) => {
+
+    if (!req.user) {
+
+        req.flash('error', 'please log in ')
+        res.redirect('/login')
+    }
     Movie.find()
         .then((allMovies) => {
             console.log(allMovies)
+            allMovies.forEach((eachMovie) => {
+                if (eachMovie.creator.equals(req.user._id)) {
+                    eachMovie.mine = true
+                }
+            })
             res.render('movies/index', { movies: allMovies })
         })
         .catch((err) => {
@@ -31,6 +42,12 @@ router.get('/movies/details/:theid', (req, res, next) => {
 })
 
 router.get('/movies/new', (req, res, next) => {
+    if (!req.user) {
+        req.flash('error', 'SORRY ARE NOT LOGGED IN')
+        res.redirect('/login')
+
+    }
+
     Celebrity.find()
         .then((result) => {
             res.render('movies/new', { allTheCelebrities: result });
@@ -47,11 +64,13 @@ router.post('/movie/creation', (req, res, next) => {
     let genre = req.body.theGenre;
     let plot = req.body.thePlot;
 
+
     Movie.create({
             title: title,
             celebrity: celebrity,
             genre: genre,
-            plot: plot
+            plot: plot,
+            creator: req.user
         })
         .then(() => {
             res.redirect('/movies')
